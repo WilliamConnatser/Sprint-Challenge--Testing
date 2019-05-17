@@ -4,7 +4,7 @@
 	"description": "Testing Sprint Challenge",
 	"main": "index.js",
 	"scripts": {
-		"test": "jest --watch --verbose",
+		"test": "cross-env DB_ENV=testing jest --watch --verbose",
 		"start": "nodemon index.js"
 	},
 	"repository": {
@@ -19,9 +19,12 @@
 	},
 	"homepage": "https://github.com/LambdaSchool/Sprint-Challenge--Testing#readme",
 	"dependencies": {
-		"express": "^4.16.4"
+		"express": "^4.17.0",
+		"knex": "^0.16.5",
+		"sqlite3": "^4.0.8"
 	},
 	"devDependencies": {
+		"cross-env": "^5.2.0",
 		"jest": "^23.6.0",
 		"supertest": "^3.3.0"
 	}
