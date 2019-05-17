@@ -32,34 +32,35 @@ describe('Express API tests', () => {
 
     it('GET /games returns an array', async () => {
         const res = await request(server).get('/games');
-        expect(res.data).toHaveLength(0);
+        expect(res.body).toHaveLength(0);
     });
 
     it('POST /games returns status 200', () => {
-        return request(server).post('/games',{
+        return request(server).post('/games').send({
             title: 'Pacman',
             genre: 'Arcade',
             releaseYear: 1980
-        }).expect(200);
+        }).set('Accept', 'application/json').expect(200);
     });
 
     it('POST /games returns ID of item inserted', async () => {
-        const res = await request(server).post('/games',{
+        const res = await request(server).post('/games').send({
             title: 'Pacman',
             genre: 'Arcade',
             releaseYear: 1980
-        });
-        expect(res.data).toBe(1);
+        }).set('Accept', 'application/json');
+        expect(res.body).toBe(1);
     });
 
     it('POST /games inserts item into database', async () => {
-        await request(server).post('/games',{
+        await request(server).post('/games').send({
             title: 'Pacman',
             genre: 'Arcade',
             releaseYear: 1980
-        });
+        }).set('Accept', 'application/json');
         const res = await request(server).get('/games');
-        expect(res.data[0]).toEqual({
+        expect(res.body[0]).toEqual({
+            id: 1,
             title: 'Pacman',
             genre: 'Arcade',
             releaseYear: 1980
